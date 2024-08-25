@@ -1,28 +1,9 @@
-import { useState } from "react"
-import ClicksTracker from "./ClicksTracker"
-
-export default function Options() {
-
-  const [clicks, setClicks] = useState(0)
-
-  const updateFeedback = () => {
-    setClicks(clicks + 1)
-  }
-
-  const resetClicks = () => {
-    setClicks(0)
-  }
-
-  return (
-    <div className="options-wrap">
-      <ClicksTracker value={clicks} onUpdate={updateFeedback} />
-      <ClicksTracker value={clicks} onUpdate={updateFeedback} />
-      <ClicksTracker value={clicks} onUpdate={updateFeedback} />
-      <button onClick={resetClicks} type="button">Reset</button>
-
-
-    </div>
-
-  )
-
+import "./Options.css"
+export default function Options({ onLeaveFeedback, onResetFeedback, totalFeedback }) {
+  return (<div className="options-wrap">
+    <button className="options-button good" onClick={() => onLeaveFeedback('good')}>Good</button>
+    <button className="options-button neutral" onClick={() => onLeaveFeedback('neutral')}>Neutral</button>
+    <button className="options-button bad" onClick={() => onLeaveFeedback('bad')}>Bad</button>
+    {totalFeedback > 0 && <button onClick={onResetFeedback}>Reset</button>}
+  </div>)
 }
